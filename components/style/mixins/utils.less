@@ -1,0 +1,49 @@
+.encoded-svg-background(@svg) {
+	@url: `encodeURIComponent(@{svg})`;
+	background-image: url("data:image/svg+xml;charset=utf-8,@{url}");
+}
+
+._preloader {
+	width: 40rpx;
+	height: 40rpx;
+  -webkit-transform-origin: 50%;
+  -webkit-animation: preloader-spin .8s steps(12, end) infinite;
+	transform-origin: 50%;
+	animation: preloader-spin .8s steps(12, end) infinite;
+	&:after {
+		display: block;
+		width: 100%;
+		height: 100%;
+		content: "";
+		background-repeat: no-repeat;
+		background-position: 50%;
+		background-size: 100%;
+	}
+}
+
+.preloader() {
+	._preloader;
+	&:after {
+		.encoded-svg-background('preloader')
+	}
+}
+
+.preloader-white() {
+	._preloader;
+	&:after {
+		.encoded-svg-background('preloader_white')
+	}
+}
+
+@keyframes preloader-spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.ell() {
+	width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
